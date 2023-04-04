@@ -4,8 +4,9 @@
   "description": "Cordova Hot Code Push CLI",
   "preferGlobal": true,
   "bin": {
-    "cordova-hcp": "bin/cordova-hcp"
+    "cordova-hcp": "bin/cordova-hcp.cjs"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nordnet/cordova-hot-code-push-cli.git"
@@ -21,9 +22,9 @@
   ],
   "scripts": {
     "pretranspile": "rimraf dist",
-    "transpile": "babel src --out-dir dist --source-maps",
+    "transpile": "babel --plugins @babel/plugin-transform-modules-commonjs src --out-dir dist",
     "dev": "npm run transpile -- --watch",
-    "eslint": "eslint --ext=.js -c .eslintrc src",
+    "eslint": "eslint --ext=.cjs -c .eslintrc src",
     "test": "mocha"
   },
   "author": "Radu Carlig for Wellnessentially",
@@ -45,7 +46,8 @@
     "yargs": "^17.7.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.21.2",
+    "@babel/cli": "^7.0.0",
     "babel-eslint": "^10.1.0",
     "babel-jscs": "^3.0.0-beta1",
     "chai": "^4.3.7",

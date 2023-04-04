@@ -5,7 +5,7 @@ const chcpContext = require(path.resolve(
   __dirname,
   "..",
   "dist",
-  "context.js"
+  "context.cjs"
 ));
 
 const cmd = argv._[0];
@@ -13,7 +13,12 @@ switch (cmd) {
   case "build":
   case "init":
     console.log("Running " + cmd);
-    const command = require(path.resolve(__dirname, "..", "dist", cmd + ".js")),
+    const command = require(path.resolve(
+        __dirname,
+        "..",
+        "dist",
+        cmd + ".cjs"
+      )),
       context = chcpContext.context(argv);
     command.execute(context);
     break;
